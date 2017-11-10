@@ -1,12 +1,10 @@
 const express = require('express');
-const morgan = require('morgan');
 
 const app = express();
 
 const blogPostsRouter = require('./blogPostsRouter');
 
 // log the http layer
-app.use(morgan('common'));
 
 app.use(express.static('public'));
 
