@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-
-
 const {BlogPosts} = require('./models');
 
 // we're going to add some blog posts to BlogPosts
@@ -17,9 +14,9 @@ BlogPosts.create(
 // send back JSON representation of all BlogPosts
 // on GET requests to root
 router.get('/', (req, res) => {
-  res.json(BlogPosts.get());
+  console.log(BlogPosts.get())
+  res.status(200).json(BlogPosts.get());
 });
-
 
 // when new BlogPosts added, ensure has required fields. if not,
 // log error and return 400 status code with hepful message.
@@ -27,9 +24,6 @@ router.get('/', (req, res) => {
 router.post('/', jsonParser, (req, res) => {
   // ensure title, content, author, publishDate are in request body
   const requiredFields = ['title', 'content', 'author', 'publishDate'];
-    
-//   for (let i=0; i<requiredFields.length; i++) {
-//     const field = requiredFields[i];
   requiredFields.forEach(field => {
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
@@ -59,7 +53,6 @@ router.put('/:id', jsonParser, (req, res) => {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
-      console.error(message);
       return res.status(400).send(message);
     }
   }
@@ -67,10 +60,8 @@ router.put('/:id', jsonParser, (req, res) => {
     const message = (
       `Request path id (${req.params.id}) and request body id `
       `(${req.body.id}) must match`);
-    console.error(message);
     return res.status(400).send(message);
   }
-  console.log(`Updating BlogPosts item \`${req.params.id}\``);
   const updatedItem = BlogPosts.update({
     id: req.params.id,
     title: req.body.title,
