@@ -25,6 +25,8 @@ const BlogPosts = {
       publishDate: publishDate || Date.now()
     };
     this.posts.push(post);
+    // this.posts = [...this.posts, post]
+    // this.posts = this.posts.slice()
     return post;
   },
   get: function(id=null) {
@@ -40,11 +42,14 @@ const BlogPosts = {
     });
   },
   delete: function(id) {
+    // this.posts = this.posts.filter(post => {
+    //     return id !== post.id
+    // })
     const postIndex = this.posts.findIndex(
       post => post.id === id);
     if (postIndex > -1) {
       this.posts.splice(postIndex, 1);
-    }
+    } 
   },
   update: function(updatedPost) {
     const {id} = updatedPost;
@@ -54,8 +59,11 @@ const BlogPosts = {
       throw new StorageException(
         `Can't update item \`${id}\` because doesn't exist.`)
     }
-    this.posts[postIndex] = Object.assign(
-      this.posts[postIndex], updatedPost);
+
+    this.posts[postIndex] = Object.assign({}, this.posts[postIndex], updatedPost);
+
+    // Object.assign({}, {}, {})
+
     return this.posts[postIndex];
   }
 };

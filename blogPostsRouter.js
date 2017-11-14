@@ -27,14 +27,16 @@ router.get('/', (req, res) => {
 router.post('/', jsonParser, (req, res) => {
   // ensure title, content, author, publishDate are in request body
   const requiredFields = ['title', 'content', 'author', 'publishDate'];
-  for (let i=0; i<requiredFields.length; i++) {
-    const field = requiredFields[i];
+    
+//   for (let i=0; i<requiredFields.length; i++) {
+//     const field = requiredFields[i];
+  requiredFields.forEach(field => {
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
       console.error(message);
       return res.status(400).send(message);
     }
-  }
+  })
   const item = BlogPosts.create(req.body.title, req.body.content, req.body.author, req.body.publishDate);
   res.status(201).json(item);
 });
@@ -42,7 +44,7 @@ router.post('/', jsonParser, (req, res) => {
 // Delete recipes (by id)!
 router.delete('/:id', (req, res) => {
     BlogPosts.delete(req.params.id);
-  console.log(`Deleted BlogPosts item \`${req.params.ID}\``);
+  console.log(`Deleted BlogPosts item \`${req.params.id}\``);
   res.status(204).end();
 });
 
@@ -72,7 +74,7 @@ router.put('/:id', jsonParser, (req, res) => {
   const updatedItem = BlogPosts.update({
     id: req.params.id,
     title: req.body.title,
-    contnet: req.body.contnet,
+    content: req.body.content,
     author: req.body.author,
     publishDate: req.body.publishDate,
   });

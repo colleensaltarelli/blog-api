@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: f56JZWxJ/vz+iNsYtDT321VBrB111irCbHl0RhQGGQPZQFWSA3DetUxReUZMtRK9P8O8x6RlYsrzGqKtJyr4ml3g+nNXCEfeh9qsrphWVc5BNKjPdBmIqRG6J92gFgD3ejyVwFdD9zSWthIMaRdq9eTUWYvfL4a5H9olCHnV/m0exl/J89frQfvz8ThiyKIPQqSEjTWmVX2c+23eYfK17FERBKX+x9O+jj1xv8j8UCfwm31jREp5TJXcDyNjAzllSFMAJQg+niZk1NJqMlJodLiiKYPlNTwvZ1oiQRmtSplVKEVZ69PHKp201Ln0PjedLeWC3JFE/5QfbpS9x97KX4lwfrVLz4KqsoVC84AIwfWbLedu90punOjYiwIP+TjvzQKE7AhyaAcypHTRyVw3IgMEN3md2rv6AhJ3GV8F+0/Gyjswxbza5hRGscPoh5H18UmNW1nVw1PP+Zu4HLzeTO4hzkb/LPP4BXpIyHLmu7u66DwEpJs2044ESLy6OSdkGaF38fmYgphVntmqaoX7rAqL+ndKTRXTq/xuJTbnjEnPaClhzbKJNVc4zjkjIpgioo/wD8kcT426Me29qzCLsn/Df4KHqi5+x1Pf7W1I3J7FgtmCR1dKT1DIAhSLgPVIIirDFTAPiMyciPz4V+9SKg//qd4Vj6iVXX6B3DntsB8=
+  app: agile-woodland-29388
+  on:
+    repo: colleensaltarelli/blog-api
